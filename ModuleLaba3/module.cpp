@@ -140,5 +140,8 @@ void rec13(){
     cin>>x;
 
     cout<<"Сумма ряда равна: "<<reccur13(n,x)<< endl;
+    cout << " /\\_/\\\n";
+    cout << "( o.o )\n";
+    cout << " > ^ <\n";
 }
 
