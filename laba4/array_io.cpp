@@ -44,7 +44,13 @@ vector<vector<int>> random_array(){ // генерация массива с за
 }
 
 
-vector<vector<int>> hand_array(int col, int row){ // гененрация массива и заполение ручным способом
+vector<vector<int>> hand_array(){ // гененрация массива и заполение ручным способом
+    int col, row; 
+    cout<<"Введите количство строк: ";
+    cin>>row;
+    cout<<"Введите количство столбцов: ";
+    cout<<col;
+    
     vector<vector<int>> matrix(row, vector<int>(col));
 
     for (int i=0; i<col; i++){
@@ -53,6 +59,14 @@ vector<vector<int>> hand_array(int col, int row){ // гененрация мас
             cin>>matrix[i][j];
 
         }
+    }
+    for (int i=0; i<col; i++){
+        for (int j=0; j<row; j++){
+
+            cout<<matrix[i][j]<<" ";
+
+        }
+        cout<<endl;
     }
     return matrix;
 }
@@ -102,8 +116,11 @@ vector<vector<int>> file_array(const string& name_file) {
 }
 
 
-vector<vector<int>> file_array(string& name_file) { // перенос массива из файла
-    string line, last_line;
+vector<vector<int>> file_array() { // перенос массива из файла
+    
+    string line, last_line, name_file;
+    cout<<"Введите имя имя файла + расширение: ";
+    cin>>name_file;
     int count_line = 0, count_row = 0;
     int i = 0, j = 0;
 
@@ -177,22 +194,22 @@ void show_matrix_file(){ //вывод массива заполненого из
 //     }
 // }
     
-void show_hand_matrix(){
-    int row, col;
-    cout<<"Введите сol: ";
-    cin>>col;
-    cout<<"Введите row: ";
-    cin>>row;
+// void show_hand_matrix(){
+//     int row, col;
+//     cout<<"Введите сol: ";
+//     cin>>col;
+//     cout<<"Введите row: ";
+//     cin>>row;
 
-    auto matrix = hand_array(col, row);
-    for (int i =0; i<col; i++){
-        for (int j=0; j<row; j++){
-            cout<<matrix[i][j]<<" ";
+//     auto matrix = hand_array(col, row);
+//     for (int i =0; i<col; i++){
+//         for (int j=0; j<row; j++){
+//             cout<<matrix[i][j]<<" ";
             
-        }
-    }
+//         }
+//     }
 
-}
+// }
 
 
 void Matrix26(){
@@ -211,10 +228,10 @@ void Matrix26(){
         matrix = random_array();
         break;
     case 2:
-
+        matrix = hand_array();
         break;
     case 3:
-
+        matrix = file_array();
         break;
 
     default:
@@ -265,7 +282,58 @@ void Matrix26(){
     
 }
 // void Matrix26();
-// void DArray8();
-// void DArray11();
+void DArray8(){
+    int n;
+    vector<vector<int>> matrix;
+    cout<<"1. Случайная генерация матрицы"<<endl;
+    cout<<"2. Ручной ввод матрицы"<<endl;
+    cout<<"3. Загрузка матрицы из файла"<<endl;
+    cout<<"Выберите режим создания матрицы: ";
+    cin>>n;
+
+
+    switch (n)
+    {
+    case 1:
+        matrix = random_array();
+        break;
+    case 2:
+        matrix = hand_array();
+        break;
+    case 3:
+        matrix = file_array();
+        break;
+
+    default:
+        break;
+    }
+    
+    int count_col=0, count_row=0;
+    for (const auto &row : matrix){
+        count_row++;
+        for (int val : row){
+            count_col++;
+        }
+    
+    }
+    int z;
+    for (int i=0; i<count_row; i++){
+        for (int j =i+1;j<count_row; j++ ){
+
+            swap( matrix[i][j], matrix[j][i]);
+
+        }
+    }
+    cout<<"Вывод новой матрицы"<<endl;
+    cout<<endl;
+    for (int i=0; i<count_row; i++){
+        for (int j=0; j<count_row; j++){
+            cout<<matrix[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+void DArray11();
 
 

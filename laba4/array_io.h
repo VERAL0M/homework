@@ -8,7 +8,7 @@ void show_matrix_file();
 
 void Matrix26();
 // void Matrix54();
-// void DArray8();
+void DArray8();
 // void DArray11();
 
 #endif 

@@ -28,7 +28,7 @@ int main(){
         // Matrix54();
         break;
     case 3:
-        // DArray8();
+        DArray8();
         break;
     case 4:
         // DArray11();
