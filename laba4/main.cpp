@@ -25,13 +25,13 @@ int main(){
         Matrix26();
         break;
     case 2:
-        // Matrix54();
+        Matrix54();
         break;
     case 3:
         DArray8();
         break;
     case 4:
-        // DArray11();
+        DArray11();
         break;
     default:
         break;

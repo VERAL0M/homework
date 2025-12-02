@@ -9,21 +9,8 @@
 
 using namespace std;
 
-vector<vector<int>> random_array(){ // генерация массива с заполенением массвиа случайными числами в диапазоне от a до b
-    int col, row,a,b;
-    cout<<"Введите кол-во рядов";
-    cin>>row;
-    
-    cout<<"Введите кол-во столбцов";
-    cin>>col;
-    
+vector<vector<int>> random_array(int row, int col, int a, int b){ // генерация массива с заполенением массвиа случайными числами в диапазоне от a до b
 
-
-    cout<<"Введите а:";
-    cin>>a;
-
-    cout<<"Введите b: ";
-    cin>>b;
 
     vector<vector<int>> matrix(row, vector<int>(col));
     
@@ -72,85 +59,46 @@ vector<vector<int>> hand_array(){ // гененрация массива и за
 }
 
 
-vector<vector<int>> file_array(const string& name_file) {
-    string line, last_line;
-    int count_line = 0, count_row = 0;
-    int i = 0, j = 0;
-
-  
-    ifstream file(name_file);
-    if (!file.is_open()) {
-        cerr << "Ошибка открытия файла." << endl;
-        return {};
-    }
-
-
-    while (getline(file, line)) {
-        ++count_line;
-        last_line = line;
-    }
-
-
-    istringstream iss(last_line);
-    string word;
-    while (iss >> word) {
-        ++count_row;
-    }
-
-
-    // vector<vector<int>> matrix(count_line, vector<int>(count_row));
-    vector<vector<int>> matrix(count_row, vector<int>(count_line));
-
-
-    file.clear(); // Очищаем флаги состояния потока
-    file.seekg(0); // Переходим обратно в начало файла
-
-
-    for (i = 0; i < count_line && getline(file, line); ++i) {
-        istringstream row_stream(line);
-        for (j = 0; j < count_row && row_stream >> matrix[i][j]; ++j) {}
-    }
-
-    file.close();
-    return matrix;
-}
 
 
 vector<vector<int>> file_array() { // перенос массива из файла
     
-    string line, last_line, name_file;
+    string line, last_line, filename;
     cout<<"Введите имя имя файла + расширение: ";
-    cin>>name_file;
-    int count_line = 0, count_row = 0;
-    int i = 0, j = 0;
+    cin>>filename;
 
-  
-    ifstream file(name_file);
+    int count_lines = 0, count_columns = 0;
+
+    ifstream file(filename);
     if (!file.is_open()) {
         cerr << "Ошибка открытия файла." << endl;
         return {};
     }
 
+    // Чтение всех строк, подсчёт количества строк и запоминание последней строки
     while (getline(file, line)) {
-        ++count_line;
+        ++count_lines;
         last_line = line;
     }
 
+    // Определение числа столбцов по последнему элементу
     istringstream iss(last_line);
     string word;
     while (iss >> word) {
-        ++count_row;
+        ++count_columns;
     }
 
-    // vector<vector<int>> matrix(count_line, vector<int>(count_row));
-    vector<vector<int>> matrix(count_row, vector<int>(count_line));
+    // Создаем правильную матрицу: count_lines строк и count_columns столбцов
+    vector<vector<int>> matrix(count_lines, vector<int>(count_columns));
 
-    file.clear(); // Очищаем флаги состояния потока
-    file.seekg(0); // Переходим обратно в начало файла
+    // Возвращаемся в начало файла
+    file.clear();
+    file.seekg(0);
 
-    for (i = 0; i < count_line && getline(file, line); ++i) {
+    // Заполняем матрицу данными из файла
+    for (int i = 0; i < count_lines && getline(file, line); ++i) {
         istringstream row_stream(line);
-        for (j = 0; j < count_row && row_stream >> matrix[i][j]; ++j) {}
+        for (int j = 0; j < count_columns && row_stream >> matrix[i][j]; ++j) {}
     }
 
     file.close();
@@ -163,7 +111,7 @@ void show_matrix_file(){ //вывод массива заполненого из
     cout<<"Введите название файла. Незабудьте указать расширение";
     cin>>name_file;
 
-    auto result = file_array(name_file);
+    auto result = file_array();
     for (const auto &row : result){
         for (int val : row){
             cout<< val<<" ";
@@ -171,61 +119,48 @@ void show_matrix_file(){ //вывод массива заполненого из
     }
 }
 
-// void show_random_matrix(){
-//     int col, row,a,b;
-//     cout<<"Введите кол-во столбцов";
-//     cin>>col;
-    
-//     cout<<"Введите кол-во рядов";
-//     cin>>row;
 
-//     cout<<"Введите а:";
-//     cin>>a;
-
-//     cout<<"Введите b: ";
-//     cin>>b;
-
-//     auto matrix = random_array(col, row, a,b);
-//     for (int i=0; i<col; i++){
-//         for (int j=0; j<row; j++){
-//             cout<<matrix[i][j]<<" ";
-//         }
-//         cout<<endl;
-//     }
-// }
-    
-// void show_hand_matrix(){
-//     int row, col;
-//     cout<<"Введите сol: ";
-//     cin>>col;
-//     cout<<"Введите row: ";
-//     cin>>row;
-
-//     auto matrix = hand_array(col, row);
-//     for (int i =0; i<col; i++){
-//         for (int j=0; j<row; j++){
-//             cout<<matrix[i][j]<<" ";
-            
-//         }
-//     }
-
-// }
-
-
-void Matrix26(){
+int regime(){
     int n;
-    vector<vector<int>> matrix;
     cout<<"1. Случайная генерация матрицы"<<endl;
     cout<<"2. Ручной ввод матрицы"<<endl;
     cout<<"3. Загрузка матрицы из файла"<<endl;
     cout<<"Выберите режим создания матрицы: ";
     cin>>n;
+    return n;
+}
 
+
+void random_matrix_vvod(int& a, int& b, int& col, int& row){
+
+        cout<<"Введите кол-во рядов M";
+        cin>>row;
+        
+        cout<<"Введите кол-во столбцов N";
+        cin>>col;
+        
+
+
+        cout<<"Введите а:";
+        cin>>a;
+
+        cout<<"Введите b: ";
+        cin>>b;
+}
+
+
+void Matrix26(){
+
+    vector<vector<int>> matrix;
+    int n=regime();
 
     switch (n)
     {
     case 1:
-        matrix = random_array();
+        int col, row,a,b;
+        random_matrix_vvod(a,b,col, row);
+
+        matrix = random_array(row, col, a ,b);
         break;
     case 2:
         matrix = hand_array();
@@ -269,8 +204,9 @@ void Matrix26(){
         if (col<el){
             el=col;
         }
-        cout<<"Самое маленькое произведние в столбцах "<<el<<endl;
     }
+    cout<<"Самое маленькое произведние в столбцах "<<el<<endl;
+        
     int counter=0;
     for (const auto &col: max_multiplications){
 
@@ -281,21 +217,20 @@ void Matrix26(){
     }
     
 }
-// void Matrix26();
+
 void DArray8(){
-    int n;
+
     vector<vector<int>> matrix;
-    cout<<"1. Случайная генерация матрицы"<<endl;
-    cout<<"2. Ручной ввод матрицы"<<endl;
-    cout<<"3. Загрузка матрицы из файла"<<endl;
-    cout<<"Выберите режим создания матрицы: ";
-    cin>>n;
+    int n=regime();
 
 
     switch (n)
     {
     case 1:
-        matrix = random_array();
+        int col, row,a,b;
+        random_matrix_vvod(a,b,col, row);
+        matrix = random_array(row, col, a ,b);
+
         break;
     case 2:
         matrix = hand_array();
@@ -334,6 +269,129 @@ void DArray8(){
     }
 }
 
-void DArray11();
 
+
+void DArray11(){
+    int n=regime();
+ 
+    vector<vector<int>> matrix;
+
+
+    switch (n)
+    {
+    case 1:
+        int col, row,a,b;
+        random_matrix_vvod(a,b,col, row);
+        matrix = random_array(col, row, a ,b);
+        break;
+    case 2:
+        matrix = hand_array();
+        break;
+    case 3:
+        matrix = file_array();
+        break;
+
+    default:
+        break;
+    }
+    
+    int count_col=0, count_row=0, max_el_index_row, max_el_index_col, minel=INT_MIN;
+    
+    
+    for (const auto &row : matrix){
+        count_col=0;
+        
+        for (int val : row){
+            cout<<val<<" ";
+            if (minel<val){
+                minel=val;
+                max_el_index_row=count_row;
+                max_el_index_col=count_col;
+
+            }
+            count_col++;
+        }
+        cout<<endl;
+        count_row++;
+
+    }
+    
+    cout<<"index row: "<< max_el_index_row<<endl;
+    cout<<"index col: "<<max_el_index_col<<endl;
+    cout<<"Максимальный элемент матрицы: "<<matrix[max_el_index_row][max_el_index_col]<<endl;
+    
+
+}
+
+bool isNegativeColumn(const vector<vector<int>>& matrix, int columnIndex) {
+    for (const auto& row : matrix) {
+        if (row[columnIndex] >= 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void Matrix54(){
+    int mode = regime(); 
+    vector<vector<int>> matrix;
+
+    switch(mode) {
+        case 1: {
+            int a, b, col, row;
+            random_matrix_vvod(a, b, col, row);
+            matrix = random_array(row, col, a, b);
+            break;
+        }
+        case 2: { 
+            matrix = hand_array();
+            break;
+        }
+        case 3: { 
+            matrix = file_array();
+            break;
+        }
+        default: {
+            cerr << "Ошибка: неверный выбор режима.";
+            return;
+        }
+    }
+
+
+
+
+    const int columns = matrix.empty() ? 0 : matrix.front().size();
+
+
+    int negColIdx = -1;
+    for (int col = 0; col < columns; ++col) {
+        if (isNegativeColumn(matrix, col)) {
+            negColIdx = col;
+            break;
+        }
+    }
+
+
+    const int lastCol = columns - 1;
+
+    // Производим обмен столбцами, если нужен столбец с отрицательными элементами
+    if (negColIdx != -1) {
+        for (int row = 0; row < matrix.size(); ++row) {
+            swap(matrix[row][lastCol], matrix[row][negColIdx]); // Меняем соответствующие ячейки каждой строки
+        }
+    }
+
+    // Вывод результата
+    cout << "\nМатрица после преобразования:\n";
+    for (const auto& row : matrix) {
+        for (int val : row) {
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+}
+
+
+
+    
 
