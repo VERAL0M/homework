@@ -60,7 +60,6 @@ vector<vector<int>> hand_array(){ // гененрация массива и за
 
 
 
-
 vector<vector<int>> file_array() { // перенос массива из файла
     
     string line, last_line, filename;
@@ -139,8 +138,6 @@ void random_matrix_vvod(int& a, int& b, int& col, int& row){
         cout<<"Введите кол-во столбцов N";
         cin>>col;
         
-
-
         cout<<"Введите а:";
         cin>>a;
 
@@ -148,6 +145,27 @@ void random_matrix_vvod(int& a, int& b, int& col, int& row){
         cin>>b;
 }
 
+void out(vector<vector<int>> &matrix){
+        for (const auto& row : matrix){
+            for (int val :  row){
+                cout<<val<<" ";
+            }
+        cout<<endl;
+        }
+        
+}
+
+void save_as_file(vector<vector<int>> &matrix){
+    cout<<"Сохраняем матрицу в файл"<<endl;
+    ofstream f2; 
+    f2.open("save.txt", ios::out);
+    for (const auto &row: matrix){
+        for (int val : row){
+            f2<<val<<" ";
+        }
+    f2<<endl;
+    }
+}
 
 void Matrix26(){
 
@@ -259,24 +277,37 @@ void DArray8(){
 
         }
     }
+    cout<<"Выберите как хотите получить новую матрицу"<<endl;
+    cout<<"1. Вывод в консоль"<<endl;
+    cout<<"2. Сохранить в файл save.txt"<<endl;
+    cin>>n;
     cout<<"Вывод новой матрицы"<<endl;
-    cout<<endl;
-    for (int i=0; i<count_row; i++){
-        for (int j=0; j<count_row; j++){
-            cout<<matrix[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-}
 
+    switch (n)
+    {
+    case 1:
+        out(matrix);
+        break;
+    case 2:
+        save_as_file(matrix);
+        
+
+        break;
+    
+    default:
+        cout<<"Нет такого режима вывода"<<endl;
+        break;
+    }
+
+
+
+}
 
 
 void DArray11(){
     int n=regime();
  
     vector<vector<int>> matrix;
-
-
     switch (n)
     {
     case 1:
@@ -333,6 +364,7 @@ bool isNegativeColumn(const vector<vector<int>>& matrix, int columnIndex) {
 }
 
 void Matrix54(){
+    int n;
     int mode = regime(); 
     vector<vector<int>> matrix;
 
@@ -358,10 +390,7 @@ void Matrix54(){
     }
 
 
-
-
     const int columns = matrix.empty() ? 0 : matrix.front().size();
-
 
     int negColIdx = -1;
     for (int col = 0; col < columns; ++col) {
@@ -370,7 +399,6 @@ void Matrix54(){
             break;
         }
     }
-
 
     const int lastCol = columns - 1;
 
@@ -381,17 +409,26 @@ void Matrix54(){
         }
     }
 
-    // Вывод результата
-    cout << "\nМатрица после преобразования:\n";
-    for (const auto& row : matrix) {
-        for (int val : row) {
-            cout << val << " ";
-        }
-        cout << endl;
+    cout<<"Выберите как хотите получить новую матрицу"<<endl;
+    cout<<"1. Вывод в консоль"<<endl;
+    cout<<"2. Сохранить в файл save.txt"<<endl;
+    cin>>n;
+    cout<<"Вывод новой матрицы"<<endl;
+
+    switch (n)
+    {
+    case 1:
+        out(matrix);
+        break;
+    case 2:
+        save_as_file(matrix);
+        break;
+    
+    default:
+        cout<<"Нет такого режима вывода"<<endl;
+        break;
     }
+
 }
 
-
-
-    
 

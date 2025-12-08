@@ -40,29 +40,3 @@ int main(){
 }
 
 
-// void choice_task(){
-//     int n;
-//     cout<<"1. Matrix26"<<endl;
-//     cout<<"2. Matrix26"<<endl;
-//     cout<<"3. DArray8"<<endl;
-//     cout<<"4. DArray11"<<endl;
-//     cin>>n;
-
-//     switch (n)
-//     {
-//     case 1:
-//         void Matrix26();
-//         break;
-//     case 2:
-//         void  Matrix26();
-//         break;
-//     case 3:
-//         void DArray8();
-//         break;
-//     case 4:
-//         void DArray11();
-//         break;
-//     default:
-//         break;
-//     }
-// }
