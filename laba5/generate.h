@@ -2,7 +2,7 @@
 #define GENERATE_H
 
 
-
+void show();
 #endif 
 
 
