@@ -6,6 +6,12 @@
 #include <vector>
 #include <cmath>
 #include <ctime>
+#include <fstream>
+#include <string>
+#include <algorithm>
+
+
+
 
 using namespace std;
 
@@ -238,14 +244,6 @@ void task6() {
     wcout << count << L" попыток" << endl;
 }
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <locale>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
 
 // Функция для преобразования двоичной строки в десятичное число
 int binaryToDecimal(const string& binary) {
@@ -416,12 +414,12 @@ void five8() {
     wcout << L"Результаты проверки:" << endl;
     wcout << L"Всего примеров: " << totalExamples << endl;
     wcout << L"Правильно решено: " << correctExamples << endl;
-    // wcout << L"Неправильно решено: " << (totalExamples - correctExamples) << endl;
+    wcout << L"Неправильно решено: " << (totalExamples - correctExamples) << endl;
     
-    if (totalExamples > 0) {
-        double percentage = (static_cast<double>(correctExamples) / totalExamples) * 100;
-        wcout << L"Процент правильных ответов: " << percentage << L"%" << endl;
-    }
+    // if (totalExamples > 0) {
+    //     double percentage = (static_cast<double>(correctExamples) / totalExamples) * 100;
+    //     wcout << L"Процент правильных ответов: " << percentage << L"%" << endl;
+    // }
     
     wcout << L"\nРезультаты записаны в файл " << outputFilename.c_str() << endl;
 }
