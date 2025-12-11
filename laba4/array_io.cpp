@@ -8,7 +8,11 @@
 #include <climits> // для констант MAX
 
 using namespace std;
-
+void my_swap(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
 vector<vector<int>> random_array(int row, int col, int a, int b){ // генерация массива с заполенением массвиа случайными числами в диапазоне от a до b
 
 
@@ -273,7 +277,7 @@ void DArray8(){
     for (int i=0; i<count_row; i++){
         for (int j =i+1;j<count_row; j++ ){
 
-            swap( matrix[i][j], matrix[j][i]);
+            my_swap( matrix[i][j], matrix[j][i]);
 
         }
     }
@@ -405,7 +409,7 @@ void Matrix54(){
     // Производим обмен столбцами, если нужен столбец с отрицательными элементами
     if (negColIdx != -1) {
         for (int row = 0; row < matrix.size(); ++row) {
-            swap(matrix[row][lastCol], matrix[row][negColIdx]); // Меняем соответствующие ячейки каждой строки
+            my_swap(matrix[row][lastCol], matrix[row][negColIdx]); // Меняем соответствующие ячейки каждой строки
         }
     }
 
