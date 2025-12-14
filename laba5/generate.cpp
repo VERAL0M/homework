@@ -10,8 +10,33 @@
 #include <string>
 #include <algorithm>
 #include <ctime>
+#include <fstream>
+#include <sstream>
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <locale>
 
+std::wstring file_word() {
+    std::setlocale(LC_ALL, "");
+    
+    std::string filename;
+    std::wcout << L"Введите имя файла: ";
+    
+    std::wstring wfilename;
+    std::wcin >> wfilename;
+    
+    // Конвертация wstring в string
+    filename = std::string(wfilename.begin(), wfilename.end());
+    
+    std::wifstream file(filename);
+    if (!file) return L"";
+    
+    std::wstring word;
+    std::getline(file, word);
+    return word;
+}
 std::wstring generator(int n) {
     using namespace std;
     wstring alpha = L"йцукенгшщзхъфывапролджэячсмитьбюё";
@@ -44,6 +69,7 @@ void string48(){
     wcout<<L"Выберите режим"<<endl;
     wcout<<L"1. Ручной ввод"<<endl;
     wcout<<L"2. Случайна генерация"<<endl;
+    wcout<<L"3. Из файла"<<endl;
     wcin>>n;
 
 
@@ -65,6 +91,9 @@ void string48(){
         wcout<<word;
         break;
 
+    }
+    case 3:{
+        word=file_word();
     }
     
     default:
@@ -99,6 +128,7 @@ void str20() {
     wcout<<L"Выберите режим"<<endl;
     wcout<<L"1. Ручной ввод"<<endl;
     wcout<<L"2. Случайна генерация"<<endl;
+    wcout<<L"3. Из файла"<<endl;
     wcin>>n;
 
     switch (n)
@@ -118,6 +148,9 @@ void str20() {
         wcout<<word;
         break;
 
+    }
+    case 3:{
+        word = file_word();
     }
     
     default:
@@ -166,12 +199,13 @@ void str20() {
 void str25() {
     using namespace std;
     int z, b;
-    long long a;
+    int  a;
  
     int n;
     wcout<<L"Выберите режим"<<endl;
     wcout<<L"1. Ручной ввод"<<endl;
     wcout<<L"2. Случайна генерация"<<endl;
+    wcout<<L"3. Из файла"<<endl;
     wcin>>n;
 
     switch (n)
@@ -193,6 +227,9 @@ void str25() {
         wcout<<a;
         break;
 
+    }
+    case 3: {
+        a = stoll(file_word());
     }
     
     default:
@@ -246,6 +283,7 @@ void str37() {
     wcout<<L"Выберите режим"<<endl;
     wcout<<L"1. Ручной ввод"<<endl;
     wcout<<L"2. Случайна генерация"<<endl;
+    wcout<<L"3. Из файла"<<endl;
     wcin>>n;
 
     switch (n)
@@ -265,12 +303,14 @@ void str37() {
         break;
 
     }
+    case 3:{
+        encrypted = file_word();
+
+    }
     
     default:
         break;
     }
-
-
 
     wstring enc_letters = L"БВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯА" 
                           L"бвгдеёжзийклмнопрстуфхцчшщъыьэюяа";  
@@ -303,6 +343,7 @@ void str33() {
     wcout<<L"Выберите режим"<<endl;
     wcout<<L"1. Ручной ввод"<<endl;
     wcout<<L"2. Случайна генерация"<<endl;
+    wcout<<L"3. Из файла"<<endl;
     wcin>>n;
 
     switch (n)
@@ -317,6 +358,7 @@ void str33() {
         int l;
         wcout<<L"Создание случайного числа"<<endl;
         wcout<<L"Введите длину числа >0: ";
+        
         wcin>>l;
         
         num12=generator_num(l);
@@ -328,11 +370,12 @@ void str33() {
         }
         
 
-
-        
         wcout<<num12;
         break;
 
+    }
+    case 3:{
+        num12 = file_word();
     }
     
     default:
@@ -392,6 +435,7 @@ void task6() {
     wcout<<L"Выберите режим"<<endl;
     wcout<<L"1. Ручной ввод"<<endl;
     wcout<<L"2. Случайна генерация"<<endl;
+    wcout<<L"3. Из файла"<<endl;
     wcin>>n;
 
     switch (n)
@@ -411,6 +455,9 @@ void task6() {
         wcout<<word;
         break;
 
+    }
+    case 3:{
+        word=file_word();
     }
     
     default:
