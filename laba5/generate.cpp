@@ -9,21 +9,76 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <ctime>
 
 
+std::wstring generator(int n) {
+    using namespace std;
+    wstring alpha = L"йцукенгшщзхъфывапролджэячсмитьбюё";
+    wstring new_word;
+    
+    for (int i = 0; i < n; i++) {
+        int index = rand() % alpha.size();
+        new_word += alpha[index];
+    }
+    return new_word;
+}
+
+std::wstring generator_num(int n) {
+    using namespace std;
+    wstring alpha = L"1234567890AB";
+    wstring new_word;
+    
+    for (int i = 0; i < n; i++) {
+        int index = rand() % alpha.size();
+        new_word += alpha[index];
+    }
+    return new_word;
+}
+void string48(){
+    using namespace std;
+    wstring word;
+
+    
+    int n;
+    wcout<<L"Выберите режим"<<endl;
+    wcout<<L"1. Ручной ввод"<<endl;
+    wcout<<L"2. Случайна генерация"<<endl;
+    wcin>>n;
 
 
-using namespace std;
+    switch (n)
+    {
+    case 1:
+        wcout << L"Введите текст: ";
+        wcin.ignore();
+        getline(wcin, word);
+        
+        break;
+
+    case 2:{
+        int l;
+        wcout<<L"Введите длину слова";
+        wcin>>l;
+
+        word=generator(l);
+        wcout<<word;
+        break;
+
+    }
+    
+    default:
+        break;
+    }
 
 
-void string48(wstring& word){
     if (word.empty()) {
-        wcout << L"Введена пустая строка" << endl;
+        std::wcout << L"Введена пустая строка" << endl;
         return;
     }
 
     wchar_t first_letter = word[0];
-    wstring result = word;
+    std::wstring result = word;
     
 
     for(size_t i = 1; i < result.length(); i++){
@@ -31,11 +86,45 @@ void string48(wstring& word){
             result[i] = L'.';
         }
     }
-    wcout << L"Результат: " << result << endl;
+    std::wcout << L"Результат: " << result << endl;
 }
 
+void str20() {
+    
+    using namespace std;
+    wstring word;
 
-void str20(wstring& word) {
+    
+    int n;
+    wcout<<L"Выберите режим"<<endl;
+    wcout<<L"1. Ручной ввод"<<endl;
+    wcout<<L"2. Случайна генерация"<<endl;
+    wcin>>n;
+
+    switch (n)
+    {
+    case 1:
+        wcout << L"Введите текст ";
+        wcin.ignore();
+        getline(wcin, word);
+        
+        break;
+
+    case 2:{
+        int l;
+        wcout<<L"Введите длину слова";
+        wcin>>l;
+        word=generator(l);
+        wcout<<word;
+        break;
+
+    }
+    
+    default:
+        break;
+    }
+
+
 
     vector<wchar_t> low_alpha = {
         L'й', L'ц', L'у', L'к', L'е', L'н', L'г', L'ш', L'щ', L'з', 
@@ -61,7 +150,7 @@ void str20(wstring& word) {
     for(size_t i = 0; i < word.length(); i++) {
         wchar_t current = word[i];
         
-        // Ищем символ в векторе строчных букв
+        // Поиск символа в нижнем регистре
         bool found = false;
         for(size_t j = 0; j < low_alpha.size(); j++) {
             if(current == low_alpha[j]) {
@@ -71,19 +160,45 @@ void str20(wstring& word) {
             }
         }
     }
-    
-    wcout<<"Ваше слово с буквами в верхнем регистре";
-    wcout<<word;
+    std::wcout<<"Ваше слово с буквами в верхнем регистре: "<<word<<endl;
 }
 
 void str25() {
+    using namespace std;
+    int z, b;
+    long long a;
+ 
+    int n;
+    wcout<<L"Выберите режим"<<endl;
+    wcout<<L"1. Ручной ввод"<<endl;
+    wcout<<L"2. Случайна генерация"<<endl;
+    wcin>>n;
 
+    switch (n)
+    {
+    case 1:
+        wcout << L"Введите число в 10-ой системе счисления";
+        wcin>>a;
 
+        break;
+
+    case 2:{
+        wcout<<L"Введите диапазон из которого будет выбрано случайное целое число"<<endl;
+        wcout<<L"s: ";
+        wcin>>z;
+        wcout<<L"Введите b: ";
+        wcin>>b;
+        srand(time(0));
+        a=z+rand()%b;
+        wcout<<a;
+        break;
+
+    }
     
-    long long a; 
-    wcout << L"Введите целое число: ";
-    wcin >> a;
-    
+    default:
+        break;
+    }
+
 
     bool is_negative = (a < 0);
     if (is_negative) {
@@ -123,12 +238,39 @@ void str25() {
 
 
 void str37() {
-
+    using namespace std;
     wstring encrypted;
-    wcout << L"Введите зашифрованный текст: ";
-    wcin.ignore();
-    getline(wcin, encrypted);
+
     
+    int n;
+    wcout<<L"Выберите режим"<<endl;
+    wcout<<L"1. Ручной ввод"<<endl;
+    wcout<<L"2. Случайна генерация"<<endl;
+    wcin>>n;
+
+    switch (n)
+    {
+    case 1:
+        wcout << L"Введите зашифрованный текст: ";
+        wcin.ignore();
+        getline(wcin, encrypted);
+        
+        break;
+    case 2:{
+        int l;
+        wcout<<L"Введите длину слова";
+        wcin>>l;
+        encrypted=generator(l);
+        wcout<<encrypted;
+        break;
+
+    }
+    
+    default:
+        break;
+    }
+
+
 
     wstring enc_letters = L"БВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯА" 
                           L"бвгдеёжзийклмнопрстуфхцчшщъыьэюяа";  
@@ -151,22 +293,58 @@ void str37() {
     wcout << L"\nЗашифрованный текст: " << encrypted << endl;
     wcout << L"Расшифрованный текст: " << decrypted << endl;
 }
+
 void str33() {
-
-    
-    wcout << L"Введите 12-ричное число (цифры 0-9, буквы A/B или a/b): ";
-    
-    
+    using namespace std;
     wstring num12;
-    wcin>>num12;
 
     
+    int n;
+    wcout<<L"Выберите режим"<<endl;
+    wcout<<L"1. Ручной ввод"<<endl;
+    wcout<<L"2. Случайна генерация"<<endl;
+    wcin>>n;
+
+    switch (n)
+    {
+    case 1:
+        wcout << L"Введите число в 12-ой системе счисления: ";
+        wcin>>num12;
+
+        break;
+
+    case 2:{
+        int l;
+        wcout<<L"Создание случайного числа"<<endl;
+        wcout<<L"Введите длину числа >0: ";
+        wcin>>l;
+        
+        num12=generator_num(l);
+        while (!num12.empty() && num12[0]==L'0')
+        {
+            wcout<<L"Введите длину числа >0";
+            wcin>>l;
+            num12=generator_num(l);
+        }
+        
+
+
+        
+        wcout<<num12;
+        break;
+
+    }
+    
+    default:
+        break;
+    }
+
+
     if (num12.empty()) {
         wcout << L"Ошибка: пустой ввод!" << endl;
         return;
     }
     
-
     long long decimal = 0;
     for (int i = 0; i < num12.length(); i++) {
         char c = toupper(num12[i]);  
@@ -183,12 +361,10 @@ void str33() {
             return;
         }
         
-
         int power = num12.length() - i - 1;
         decimal += value * pow(12, power);
     }
     
-
     string base4;
     long long temp = decimal;
     
@@ -207,11 +383,40 @@ void str33() {
     wcout << L"4-ричное:  " << base4.c_str() << endl;
 }
 
-
 void task6() {
+    using namespace std;
     wstring word;
-    wcout << L"Введите слово: ";
-    wcin >> word;
+        
+
+    int n;
+    wcout<<L"Выберите режим"<<endl;
+    wcout<<L"1. Ручной ввод"<<endl;
+    wcout<<L"2. Случайна генерация"<<endl;
+    wcin>>n;
+
+    switch (n)
+    {
+    case 1:
+        wcout << L"Введите слово: ";
+        wcin.ignore();
+        getline(wcin, word);
+        
+        break;
+
+    case 2:{
+        int l;
+        wcout<<L"Введите длину слова";
+        wcin>>l;
+        word=generator(l);
+        wcout<<word;
+        break;
+
+    }
+    
+    default:
+        break;
+    }
+
     
     srand(time(0));
     int count = 0;
@@ -244,18 +449,17 @@ void task6() {
     wcout << count << L" попыток" << endl;
 }
 
-
-// Функция для преобразования двоичной строки в десятичное число
-int binaryToDecimal(const string& binary) {
+// Конвертация двоичных чисел
+int binaryToDecimal(const std::string& binary) {
+    using namespace std;
     int decimal = 0;
-    int power = 1;  // 2^0, 2^1, 2^2, ...
+    int power = 1; 
     
-    // Идем справа налево (от младших разрядов к старшим)
     for (int i = binary.length() - 1; i >= 0; i--) {
         if (binary[i] == '1') {
             decimal += power;
         } else if (binary[i] != '0') {
-            return -1;  // Некорректный символ в двоичном числе
+            return -1;  
         }
         power *= 2;
     }
@@ -263,8 +467,8 @@ int binaryToDecimal(const string& binary) {
     return decimal;
 }
 
-// Функция для преобразования десятичного числа в двоичную строку
-string decimalToBinary(int decimal) {
+std::string decimalToBinary(int decimal) {
+    using namespace std;
     if (decimal == 0) return "0";
     
     string binary;
@@ -276,11 +480,11 @@ string decimalToBinary(int decimal) {
     return binary;
 }
 
-// Функция для проверки одного примера
-bool checkExample(const string& example, string& correctAnswer) {
+// Проверка правильности решения арифметического выражения
+bool checkExample(const std::string& example, std::string& correctAnswer) {
+    using namespace std;
     // Примеры в формате: "101+110=1011"
     
-    // Находим позиции знаков
     size_t plusPos = example.find('+');
     size_t multiplyPos = example.find('*');
     size_t equalsPos = example.find('=');
@@ -338,21 +542,22 @@ bool checkExample(const string& example, string& correctAnswer) {
     return (correctAnswer == answer);
 }
 
-// Основная функция для проверки домашней работы
+// Автоматизированная проверка домашнего задания
 void five8() {
+    using namespace std;
     setlocale(LC_ALL, "ru_RU.UTF-8");
     
     string inputFilename = "FN1.txt";
     string outputFilename = "FN2.txt";
     
-    // Открываем входной файл
+
     ifstream inputFile(inputFilename);
     if (!inputFile.is_open()) {
         wcout << L"Ошибка: не удалось открыть файл " << inputFilename.c_str() << endl;
         return;
     }
     
-    // Открываем выходной файл
+
     ofstream outputFile(outputFilename);
     if (!outputFile.is_open()) {
         wcout << L"Ошибка: не удалось создать файл " << outputFilename.c_str() << endl;
@@ -369,9 +574,9 @@ void five8() {
     int totalExamples = 0;
     int correctExamples = 0;
     
-    // Читаем файл построчно
+
     while (getline(inputFile, line)) {
-        // Пропускаем пустые строки
+
         if (line.empty()) {
             outputFile << endl;
             continue;
@@ -392,7 +597,6 @@ void five8() {
             // Пример решен неверно
             outputFile << line << " -" << endl;
             
-            // Находим позицию '=' для форматированного вывода
             size_t equalsPos = line.find('=');
             if (equalsPos != string::npos) {
                 string beforeEquals = line.substr(0, equalsPos + 1);
@@ -405,96 +609,18 @@ void five8() {
         }
     }
     
-    // Закрываем файлы
+
     inputFile.close();
     outputFile.close();
-    
-    // Выводим статистику
+
     wcout << endl;
     wcout << L"Результаты проверки:" << endl;
     wcout << L"Всего примеров: " << totalExamples << endl;
     wcout << L"Правильно решено: " << correctExamples << endl;
     wcout << L"Неправильно решено: " << (totalExamples - correctExamples) << endl;
     
-    // if (totalExamples > 0) {
-    //     double percentage = (static_cast<double>(correctExamples) / totalExamples) * 100;
-    //     wcout << L"Процент правильных ответов: " << percentage << L"%" << endl;
-    // }
-    
     wcout << L"\nРезультаты записаны в файл " << outputFilename.c_str() << endl;
 }
-void show(){
 
-    setlocale(LC_ALL, "ru_RU.UTF-8");
-    
-    int n;
 
-    wcout << L"Выберите номер задачи:" << endl;
-    wcout << L"1. String48" << endl;
-    wcout << L"2. Str20" << endl;
-    wcout << L"3. Str25" << endl;
-    wcout << L"4. Str37" << endl;
-    wcout << L"5. Str33" << endl;
-    wcout << L"6. Задача 6(2)" << endl;
-    wcout << L"7. Five8" << endl;
-    wcout << L"Ваш выбор: ";
-    
 
-    wcin >> n;
-
-    switch (n) {
-    case 1: {
-        wstring word;
-        wcout << L"Введите слово: ";
-        wcin>>word;
-        // getline(wcin, word);  // Для ввода с пробелами
-        
-
-        for (size_t i = 0; i < word.length(); i++) {
-            word[i] = towupper(word[i]);
-        }
-        
-        wcout << L"Слово в верхнем регистре: " << word << endl;
-        
-        string48(word);
-        break;
-    }
-    case 2:
-    {
-        wstring word;
-        wcout<<L"Введите слово";
-        wcin>>word;
-        
-        str20(word);
-        break;
-    }
-    case 3:
-    {
-        str25();
-        break;
-    }
-    case 4:
-    {
-        str37();
-        break;
-    }
-    case 5: 
-    {
-        str33();
-        break;
-    }
-    case 6:
-    {
-        task6();
-        break;
-    }
-    case 7:
-    {
-        five8();
-        break;
-    }
-    default:
-        wcout << L"Неверный выбор. Попробуйте снова." << endl;
-        break;
-    }
-}
