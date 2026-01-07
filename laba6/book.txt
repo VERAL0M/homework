@@ -1,1 +1,3 @@
 cat	cat	200
+ser[A	weqwe	23
+we	r	0

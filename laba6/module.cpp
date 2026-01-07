@@ -163,6 +163,7 @@ void show_library(){
 void find_author(){
     using namespace std;
     string author;
+    int count=0;
     cout<<"Введите автора ";
     cin>>author;
     ifstream file("book.txt");
@@ -181,10 +182,11 @@ void find_author(){
         string name = line.substr(pos1+1, pos2-pos1-1);
     
             if (name==author){
+                count=1;
                 cout<<"Вот что удалось найти: ";
                 cout<<line<<endl;
             }
-            else{
+            if (count==0){
                 cout<<"Ничего не найдено по вашему запросу("<<endl;
             }
         }
@@ -192,6 +194,7 @@ void find_author(){
 }
 void find_name(){
     using namespace std;
+    int count=0;
     string find_book;
     cout<<"Введите название книги, которую нужно найти: ";
     cin>>find_book;
@@ -209,11 +212,11 @@ void find_name(){
 
         string name = line.substr(0, pos1);
         if (name.find(find_book) != string::npos){
-            
+            count=1;
             cout<<"Вот что удалось найти: ";
             cout<<line<<endl;
         }
-        else{
+        if (name.find(find_book) == string::npos && count==0){
             cout<<"Ничего не найдено по вашему запросу("<<endl;
         }
     }
