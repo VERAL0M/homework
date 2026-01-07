@@ -4,6 +4,9 @@
 #include "module.h"
 #include <iomanip>
 
+
+
+
 void examtask4(){
     using namespace std;
     ifstream database("1.txt");
@@ -11,19 +14,20 @@ void examtask4(){
     database>>count_client;
     int min_hours=1;
     int need_month, need_year;
+    fitnes_center fitnes;
     for (int i=1; i<=count_client; i++){
         int month, year, code, hours;
 
-        database>>month>>year>>code>>hours;
-        if (month>12 || month<=0 || year<2000 || year>2010 || hours>30 || hours<1){
+        database>>fitnes.month>>fitnes.year>>fitnes.code>>fitnes.hours;
+        if (fitnes.month>12 || fitnes.month<=0 || fitnes.year<2000 || fitnes.year>2010 || fitnes.hours>30 || fitnes.hours<1){
             cout<<"Не вернные входные данные, строка не будет рассматриваться"<<endl;
             break;
         }
         
-        if (min_hours<=hours){
-            min_hours=hours;
-            need_month=month;
-            need_year=year;
+        if (min_hours<=fitnes.hours){
+            min_hours=fitnes.hours;
+            need_month=fitnes.month;
+            need_year=fitnes.year;
         }
     }
     cout<<"Максимальная продолжительность занятий: "<<min_hours<<" часов "<<"Год: "<<need_year<<" "<<"Месяц: "<<need_month<<endl;
@@ -38,7 +42,7 @@ void task2(){
     int n; 
     cout<<"Введите кол-во учеников: ";
     cin>>n;
-    ofstream student_base("2.txt", std::ios::app);
+    ofstream student_base("2.txt", std::ios::out);
 
     if (!student_base) {
         cerr << "Ошибка открытия файла!" << endl;
@@ -59,7 +63,7 @@ void task2(){
             cout<<"Введите скорость чтения ученика: ";
             cin>>student.info.reading_speed;
 
-            student_base<<student.info.point;
+            student_base<<student.info.reading_speed;
  
         }
         
@@ -99,7 +103,7 @@ void task2(){
         return;
     }
     
-    // Заголовок
+
     cout << "+---------------------+---------------+---------+-------------------------+" << endl;
     cout << "| Фамилия             | Имя           | Класс   | Результат              |" << endl;
     cout << "+---------------------+---------------+---------+-------------------------+" << endl;
@@ -218,12 +222,15 @@ void find_name(){
 }
 void task3(){
     using namespace std;
+
+
     int n;
     cout<<"Выберите режим работы"<<endl;
     cout<<"1. Добавление книги"<<endl;
     cout<<"2. Вывод инфрмации о книгах"<<endl;
     cout<<"3. Поиск по автору"<<endl;
     cout<<"4. Поиск по частичному совпадению заголовка"<<endl;
+    cout<<"0. Выход"<<endl;
     cin>>n;
 
 
@@ -231,30 +238,27 @@ void task3(){
     {
     case 1:
         append_book();
-        
+        task3();
+            
         break;
     case 2:
         show_library();
+        task3();
         break;
     case 3: 
         find_author();
+        task3();
         break;
     case 4:
         find_name();
+        task3();
         break;
-        
+    case 0:
+        break;
     default:
         break;
     }
 
 
-
+    }
     
-
-
-
-
-
-
-
-}

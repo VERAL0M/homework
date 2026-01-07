@@ -2,6 +2,14 @@
 #define MODULE_H
 #include <string>
 
+struct fitnes_center
+{
+    int month;
+    int year;
+    int hours;
+    int code;
+    
+};
 struct Student
 {
     
@@ -29,4 +37,5 @@ void append_book();
 void show_library();
 void find_author();
 void find_name();
+void examtask4();
 #endif 
