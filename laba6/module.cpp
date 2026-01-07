@@ -142,7 +142,16 @@ void append_book(){
     cin>>book.author;
     cout<<"Год издания: ";
     cin>>book.year;
-    library<<book.name<<"\t"<<book.author<<"\t"<<book.year<<endl;
+    if (book.year>0){
+        library<<book.name<<"\t"<<book.author<<"\t"<<book.year<<endl;
+        
+        
+    }
+    else{
+        cout<<"Неверный формат"<<endl;
+        cout<<"!!!Год издания не ЧИСЛО!!!"<<endl;
+    }
+    
     
     library.close();
 }

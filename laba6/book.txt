@@ -1,3 +1,6 @@
 cat	cat	200
 ser[A	weqwe	23
 we	r	0
+f	d	0
+q	w	2
+к	е	1
