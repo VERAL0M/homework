@@ -1,0 +1,193 @@
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <fstream>
+#include <sstream>
+#include "module.h"
+
+std::vector<int> load(){
+    using namespace std; 
+    vector<int> load_vector;
+    cout<<"Введите название файла + .txt: ";
+    string name_file;
+    cin>>name_file;
+    ifstream file(name_file);
+
+    if (!file.is_open()) {
+        cout<< "Ошибка открытия файла!"<<endl;
+        return load_vector;
+    }
+    string line;
+    if (std::getline(file, line)) {
+        istringstream iss(line);
+        int value;
+        
+        while (iss >> value) {
+            load_vector.push_back(value);
+        }
+    }
+    
+    file.close();  
+    return load_vector;
+
+}
+std::vector<int> generation_game(){
+    using namespace std;
+    srand(time(0));
+
+    vector<int> tag_array;
+    vector<int> alfa = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15, 0};
+
+    for (int i=0; i<16; i++){
+        int index = rand() % alfa.size();
+        int num = alfa[index];
+        alfa.erase(alfa.begin() + index);
+
+        tag_array.push_back(num);
+
+    }
+    return tag_array;
+    
+    
+}
+void upload(std::vector<int>&l){
+    using namespace std;
+    cout<<"Введите название файла для сохранения прогресса: ";
+    string name_file;
+    cin>>name_file;
+    ofstream file(name_file);
+    if (!file.is_open()) {
+        cout << "Ошибка открытия файла!" << endl;
+        return;
+    }
+    for (int i=0; i<16; i++){
+        file<<l[i]<<" ";
+
+    }
+    cout<<"Игра сохранена в файл: "<<name_file<<" ";
+
+}
+void show(std::vector<int> &l){
+    using namespace std;
+    int start_pos;
+    vector<int> victory ={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0};
+
+
+    bool flags=true;
+
+    while (flags){
+        if (victory==l){
+            cout<<"      Игра завершена"<<endl;
+            cout<<"───────▄▀▄─────▄▀▄───────"<<endl;
+            cout<<"──────▄█░░▀▀▀▀▀░░█▄──────"<<endl;
+            cout<<"──▄▄──█░░░░░░░░░░░█──▄▄──"<<endl;
+            cout<<"─█▄▄█─█░░▀░░┬░░▀░░█─█▄▄█─"<<endl;
+            cout<<"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█"<<endl;
+            cout<<"█ 💗  Вы выйграли!  💗  █"<<endl;
+            cout<<"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"<<endl;
+            cout<<"──▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄──"<<endl;
+            cout<<"─█░░░█░░░░░░░░░░░▄▄░██░█─"<<endl;
+            cout<<"─█░▀▀█▀▀░▄▀░░▄▀░░▀▀░▄▄░█─"<<endl;
+            cout<<"─█░░░▀░░░▄▄▄▄▄▄░░██░▀▀░█─"<<endl;
+            cout<<"──▀▄▄▄▄▄▀──────▀▄▄▄▄▄▄▀──"<<endl;
+            cout<<endl;
+            cout<<"Хотите сыграть снова? да/нет"<<endl;
+            string answer;
+            cin>>answer;
+            if (answer=="да" || answer=="ДА" || answer=="Да"){
+                int n;
+                cout<<"Выберите режим игры"<<endl;
+                cout<<"1. Старт"<<endl;
+                cout<<"2. Загрузить сохранение"<<endl;
+                cout<<"Введите: ";
+                cin>>n;
+
+                vector<int> game_board;  
+
+                switch (n) {
+                    case 1:
+                        game_board = generation_game(); 
+                        show(game_board);
+                        break;
+                            
+                    case 2:
+                        game_board = load();  
+                        show(game_board);
+
+                        break;
+                    default:
+                        break;
+                    }
+
+                    }
+                    else{
+                        cout<<"Пока"<<endl;
+                        break;
+                    }
+                            
+
+                }
+
+        string control;
+        for (int i=0; i<16; i++){
+            if (i%4==0){
+                cout<<endl;
+                cout<<"---------------------"<<endl;
+                cout<<"| ";
+            }
+            if (l[i]<10){
+                if (l[i]==0){
+                    start_pos = i;
+                    cout<<" "<<" "<<" | ";
+                }
+                else{
+                    cout<<" "<<l[i]<<" | ";
+                }
+            }
+            else{
+                cout<<l[i]<<" | ";
+            }
+            
+        }
+        cout<<endl;
+        cout<<"Управление: W-вверх, S-вниз, A-влево, D-вправо E-выход "<<endl;
+        cout<<"...";
+        
+        cin>>control;
+        control = toupper(control[0]);
+        if (control=="A" && start_pos%4!=0){
+            swap(l[start_pos-1], l[start_pos]);
+            cout<<"________Update_______"<<endl;
+        }
+        else{
+            if (control=="D" && (start_pos+1)%4!=0){
+                swap(l[start_pos+1], l[start_pos]);
+                cout<<"________Update_______"<<endl;}
+            else{
+                if (control=="W" && start_pos>3){
+                    swap(l[start_pos-4], l[start_pos]);
+                    cout<<"________Update_______"<<endl;
+                }
+                else{
+                    if (control=="S" && start_pos<12){
+                        swap(l[start_pos+4], l[start_pos]);
+                        cout<<"________Update_______"<<endl;
+                    }
+                    else{
+                        if ("E"==control){
+                            cout<<"Игра завершена"<<endl;
+                            upload(l);
+                            flags=false;
+                            
+                        }
+                        else{  
+                            cout<<"Введён не поддреживаемый символ"<<endl;
+                        }
+                       
+                    }
+                }        
+        }
+    }
+} 
+
+}
