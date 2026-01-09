@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "module.h"
+#include <algorithm>
 
 std::vector<int> load(){
     using namespace std; 
@@ -31,25 +32,61 @@ std::vector<int> load(){
     return load_vector;
 
 }
-std::vector<int> generation_game(){
+
+
+
+
+bool is_solvable(const std::vector<int>& board) {
+
+    int inversions = 0;
+    
+    for (int i = 0; i < 15; i++) {
+        if (board[i] == 0) continue;
+        
+        for (int j = i + 1; j < 16; j++) {
+            if (board[j] == 0) continue;
+            
+            if (board[i] > board[j]) {
+                inversions++;
+            }
+        }
+    }
+
+    int empty_row = 0;
+    for (int i = 0; i < 16; i++) {
+        if (board[i] == 0) {
+            empty_row = 4 - (i / 4);  
+            break;
+        }
+    }
+    
+
+    return (inversions % 2) == (empty_row % 2);
+}
+std::vector<int> generation_game() {
     using namespace std;
     srand(time(0));
-
+    
     vector<int> tag_array;
     vector<int> alfa = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15, 0};
-
-    for (int i=0; i<16; i++){
-        int index = rand() % alfa.size();
-        int num = alfa[index];
-        alfa.erase(alfa.begin() + index);
-
-        tag_array.push_back(num);
-
-    }
+    
+    do {
+        
+        tag_array.clear();
+        vector<int> temp_alfa = alfa;  
+        
+        for (int i = 0; i < 16; i++) {
+            int index = rand() % temp_alfa.size();
+            int num = temp_alfa[index];
+            temp_alfa.erase(temp_alfa.begin() + index);
+            tag_array.push_back(num);
+        }
+    } while (!is_solvable(tag_array));  
+    
     return tag_array;
-    
-    
 }
+    
+
 void upload(std::vector<int>&l){
     using namespace std;
     cout<<"Введите название файла для сохранения прогресса: ";
