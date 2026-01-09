@@ -1,20 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <iostream>
-#include <fstream>
 #include <string>
 #include <vector>
 #include <iomanip>
 #include "module.h"
-
-
 #include <algorithm>
 #include <map>
 #include <climits>
-#include <string>
 
-// #include <algorithm>
 
 
 
@@ -45,9 +39,9 @@ void sort8() {
     }
     outFile << endl << "Протокол сортировки по убыванию:" << endl;
     
-    // Сортировка методом простого выбора
+
     for (int i = 0; i < N - 1; i++) {
-        // Находим максимальный элемент в неотсортированной части
+
         int maxIndex = i;
         for (int j = i + 1; j < N; j++) {
             if (arr[j] > arr[maxIndex]) {
@@ -55,38 +49,32 @@ void sort8() {
             }
         }
         
-        // Обменяем найденный максимальный элемент с элементом на позиции i
+     
         if (maxIndex != i) {
             swap(arr[i], arr[maxIndex]);
         }
-        
-        // Вывод текущего состояния массива в файл
+  
         outFile << "Итерация " << (i + 1) << ": ";
-        
-        // Выводим отсортированную часть
+
         for (int k = 0; k <= i; k++) {
             outFile << arr[k] << " ";
         }
-        
-        // Разделитель
+
         outFile << "| ";
-        
-        // Выводим неотсортированную часть
+
         for (int k = i + 1; k < N; k++) {
             outFile << arr[k] << " ";
         }
         outFile << endl;
     }
-    
-    // Вывод окончательного результата
+   
     outFile << endl << "Отсортированный массив: ";
     for (int num : arr) {
         outFile << num << " ";
     }
     outFile << endl;
-    
-    // Также выведем результат на экран
-    cout << endl << "Массив отсортирован. Протокол сохранен в файле 'sort_protocol.txt'" << endl;
+
+    cout << endl << "Массив отсортирован." << endl;
     cout << "Отсортированный массив: ";
     for (int num : arr) {
         cout << num << " ";
@@ -155,19 +143,22 @@ void Five13() {
     shellSort(students);
     
 
-    outputFile << left << setw(15) << "Фамилия" << right << setw(3) << "Балл" << endl;
+    outputFile << left << "Фамилия" <<string(8, ' ')<<"| "<<right << setw(3) << "Балл" << endl;
     outputFile << string(18, '-') << endl;
-    
+
     for (const auto& student : students) {
 
+
         if (student.score>100 || student.score<0){
-                outputFile << left << setw(15) << student.surname 
-                   << right << setw(3) << "Баллы не соответсвуют допустимым значениям от 0 до 100" << endl;
+            int spaces=(15-(student.surname.length())/2);
+            outputFile<< student.surname<<string(spaces, ' ') ;
+            outputFile<< "|"<<right<<setw(3)<<"ERR"<<endl;
 
         }
         else{
-            outputFile << left << setw(15) << student.surname 
-                   << right << setw(3) << student.score << endl;
+            int spaces=(15-(student.surname.length())/2);
+            outputFile<< student.surname<<string(spaces, ' ') ;
+            outputFile<< "|"<<right<<setw(3)<<student.score<<endl;
         }
 
     }
@@ -179,12 +170,6 @@ void Five13() {
     outputFile.close();
 
 }
-
-
-
-
-
-
 
 
 
