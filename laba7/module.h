@@ -21,6 +21,11 @@ struct YearResult {
     int year;         
     int month;         
 };
+struct Record {
+    int duration;
+    int year;
+    int month;
+};
 
 void sort8();
 void Five13();

@@ -173,14 +173,23 @@ void Five13() {
 
 
 
+
+
+
+
+
+
 bool compareYearResults(const YearResult& a, const YearResult& b) {
     using namespace std;
-    if (a.minDuration != b.minDuration) return a.minDuration < b.minDuration;
+
+    if (a.minDuration != b.minDuration) 
+        return a.minDuration < b.minDuration;
     return a.year < b.year;
 }
 
 void ExamTaskC16() {
     using namespace std;
+
     ifstream inputFile("ExamTaskC16.txt");
     
     if (!inputFile.is_open()) {
@@ -191,76 +200,77 @@ void ExamTaskC16() {
     int K, N;
     inputFile >> K >> N;
     
-    // Векторы для группировки по годам
-    vector<int> years;  // список уникальных годов
-    vector<vector<pair<int, int>>> recordsByYear;  // записи для каждого года
+    // Вектор для хранения отфильтрованных записей
+    vector<Record> records;
     
+    // Считываем и фильтруем записи
     for (int i = 0; i < N; i++) {
         int duration, code, year, month;
         inputFile >> duration >> code >> year >> month;
         
         if (code == K && duration > 0) {
-            // Ищем год в векторе years
-            int yearIndex = -1;
-            for (int j = 0; j < years.size(); j++) {
-                if (years[j] == year) {
-                    yearIndex = j;
-                    break;
-                }
-            }
-            
-            if (yearIndex == -1) {
-                // Новый год - добавляем
-                years.push_back(year);
-                recordsByYear.push_back({{duration, month}});
-            } else {
-                // Существующий год - добавляем запись
-                recordsByYear[yearIndex].push_back({duration, month});
-            }
+            records.push_back({duration, year, month});
         }
     }
     
     inputFile.close();
     
-    if (years.empty()) {
+    if (records.empty()) {
         cout << "Нет данных" << endl;
         return;
     }
     
+    // Создаем вектор для хранения уникальных годов
+    vector<int> years;
+    
+    // Находим уникальные годы
+    for (const auto& record : records) {
+        bool found = false;
+        for (int year : years) {
+            if (year == record.year) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            years.push_back(record.year);
+        }
+    }
+    
+    // Сортируем года по возрастанию
+    sort(years.begin(), years.end());
+    
+    // Вектор для результатов
     vector<YearResult> results;
     
-    // Обрабатываем каждый год
-    for (int i = 0; i < years.size(); i++) {
-        int year = years[i];
-        const auto& records = recordsByYear[i];
-        
+    // Для каждого года находим минимальную продолжительность
+    for (int year : years) {
         int minDuration = INT_MAX;
         int bestMonth = -1;
         
+        // Проходим по всем записям и ищем минимальную продолжительность для данного года
         for (const auto& record : records) {
-            int duration = record.first;
-            int month = record.second;
-            
-            if (duration < minDuration) {
-                minDuration = duration;
-                bestMonth = month;
-            } else if (duration == minDuration && month > bestMonth) {
-                bestMonth = month;
+            if (record.year == year) {
+                if (record.duration < minDuration) {
+                    minDuration = record.duration;
+                    bestMonth = record.month;
+                } else if (record.duration == minDuration && record.month > bestMonth) {
+                    bestMonth = record.month;
+                }
             }
         }
         
-        YearResult result;
-        result.minDuration = minDuration;
-        result.year = year;
-        result.month = bestMonth;
-        results.push_back(result);
+        // Добавляем результат, если нашли данные для этого года
+        if (minDuration != INT_MAX) {
+            results.push_back({minDuration, year, bestMonth});
+        }
     }
     
+    // Сортируем результаты согласно требованиям
     sort(results.begin(), results.end(), compareYearResults);
     
+    // Выводим результаты
     for (const auto& result : results) {
         cout << result.minDuration << " " << result.year << " " << result.month << endl;
     }
-    
-
 }

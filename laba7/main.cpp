@@ -18,8 +18,10 @@ int main(){
         break;
     case 2:
         ExamTaskC16();
+        break;
     case 3:
         Five13();
+        break;
     default:
         break;
     }
