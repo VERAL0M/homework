@@ -6,32 +6,6 @@
 #include "module.h"
 #include <algorithm>
 
-std::vector<int> load(){
-    using namespace std; 
-    vector<int> load_vector;
-    cout<<"Введите название файла + .txt: ";
-    string name_file;
-    cin>>name_file;
-    ifstream file(name_file);
-
-    if (!file.is_open()) {
-        cout<< "Ошибка открытия файла!"<<endl;
-        return load_vector;
-    }
-    string line;
-    if (std::getline(file, line)) {
-        istringstream iss(line);
-        int value;
-        
-        while (iss >> value) {
-            load_vector.push_back(value);
-        }
-    }
-    
-    file.close();  
-    return load_vector;
-
-}
 
 
 
@@ -63,6 +37,65 @@ bool is_solvable(const std::vector<int>& board) {
 
     return (inversions % 2) == (empty_row % 2);
 }
+std::vector<int> load(){
+    using namespace std; 
+    vector<int> full_vector = {0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+    vector<int> load_vector;
+    cout<<"Введите название файла + .txt: ";
+    string name_file;
+    cin>>name_file;
+    ifstream file(name_file);
+
+    if (!file.is_open()) {
+        cout<< "Ошибка открытия файла!"<<endl;
+        return load_vector;
+    }
+    string line;
+    if (std::getline(file, line)) {
+        istringstream iss(line);
+        int value, counter=0;
+
+        
+        while (iss >> value) {
+            if (value<=15 && value>=0){
+                if (value==0){
+                    counter++;
+                }
+                
+                load_vector.push_back(value);
+            }
+            else{
+                cout<<"Числа выходят за диапазон допустимых значений"<<endl;
+                return vector<int>();
+            }
+            
+        }
+        if (counter!=1){
+            cout<<"Набор входных данных должен содержать ровно одну пустую клетку"<<endl;
+            return vector<int>();
+        }
+    }
+    
+    file.close();  
+
+    vector<int> sorted_load = load_vector;
+    sort(sorted_load.begin(), sorted_load.end());
+    if (sorted_load!=full_vector){
+        cout<<"Файл с сохранением содержит ошибку. Возможно сущетсвуют повторяющиеся числа или файл пустой"<<endl;
+        return vector<int>();
+    }
+    if (is_solvable(load_vector)){
+        return load_vector;
+
+    }
+    else{
+        cout<<"Файл с сохранением содержит ошибку. НЕТ РЕШЕНИЙ"<<endl;
+        return vector<int>();
+    }
+    
+
+}
+
 std::vector<int> generation_game() {
     using namespace std;
     srand(time(0));
