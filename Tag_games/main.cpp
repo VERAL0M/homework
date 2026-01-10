@@ -38,7 +38,7 @@ int main(){
 
             break;
         default:
-            cout<<"Нет такого режима работы"<<endl;
+            cout<<"Нет такого режима работы!"<<endl;
             break;
         }
 
