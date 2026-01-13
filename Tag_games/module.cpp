@@ -35,7 +35,8 @@ bool is_solvable(const std::vector<int>& board) {
     }
     
 
-    return (inversions % 2 == 0) == (empty_row % 2 == 1);
+    return (inversions % 2) != (empty_row % 2);
+    
 }
 std::vector<int> load(){
     using namespace std; 
