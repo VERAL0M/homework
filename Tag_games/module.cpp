@@ -40,7 +40,7 @@ bool is_solvable(const std::vector<int>& board) {
 }
 std::vector<int> load(){
     using namespace std; 
-    vector<int> full_vector = {0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+    vector<int> full_vector = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     vector<int> load_vector;
     cout<<"Введите название файла + .txt: ";
     string name_file;

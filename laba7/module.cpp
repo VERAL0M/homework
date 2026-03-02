@@ -200,10 +200,10 @@ void ExamTaskC16() {
     int K, N;
     inputFile >> K >> N;
     
-    // Вектор для хранения отфильтрованных записей
+
     vector<Record> records;
     
-    // Считываем и фильтруем записи
+ 
     for (int i = 0; i < N; i++) {
         int duration, code, year, month;
         inputFile >> duration >> code >> year >> month;
@@ -220,10 +220,10 @@ void ExamTaskC16() {
         return;
     }
     
-    // Создаем вектор для хранения уникальных годов
+
     vector<int> years;
     
-    // Находим уникальные годы
+   
     for (const auto& record : records) {
         bool found = false;
         for (int year : years) {
@@ -237,18 +237,17 @@ void ExamTaskC16() {
         }
     }
     
-    // Сортируем года по возрастанию
+
     sort(years.begin(), years.end());
     
-    // Вектор для результатов
+
     vector<YearResult> results;
-    
-    // Для каждого года находим минимальную продолжительность
+
     for (int year : years) {
         int minDuration = INT_MAX;
         int bestMonth = -1;
         
-        // Проходим по всем записям и ищем минимальную продолжительность для данного года
+   
         for (const auto& record : records) {
             if (record.year == year) {
                 if (record.duration < minDuration) {
@@ -266,10 +265,10 @@ void ExamTaskC16() {
         }
     }
     
-    // Сортируем результаты согласно требованиям
+
     sort(results.begin(), results.end(), compareYearResults);
     
-    // Выводим результаты
+
     for (const auto& result : results) {
         cout << result.minDuration << " " << result.year << " " << result.month << endl;
     }
