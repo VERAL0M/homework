@@ -1,7 +1,14 @@
+
 #include <iostream>
 #include "module.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
 int main(){
+
     using namespace std;
+
     int n=10;
 
 
