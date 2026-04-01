@@ -16,11 +16,10 @@ int main(){
     while (n!=0)
     {
         
-        cout<<"1. ListWork69"<<endl;
-        cout<<"2. ListWork41"<<endl;
-        cout<<"3. ListWork44"<<endl;
-        cout<<"4. ListWork47"<<endl;
-        cout<<"5. 8"<<endl;
+        cout<<"1. STL2Seq5"<<endl;
+        cout<<"2. STL2Seq15"<<endl;
+        cout<<"3. STL2Seq23"<<endl;
+        cout<<"4. STL1Iter19"<<endl;
         cout<<"0. Exit"<<endl;
         cout<<"Введите номер задачи: ";
         cin>>n;
@@ -38,9 +37,6 @@ int main(){
 
         case 4:
             task4();
-            break;
-        case 5:
-            task5();
             break;
         case 0:
             break;
