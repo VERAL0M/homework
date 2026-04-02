@@ -4,7 +4,7 @@
 #include <iterator>
 #include <deque>
 #include <algorithm>
-
+#include <limits>
 using namespace std;
 void task1() {
     int n;
@@ -84,9 +84,6 @@ void task2() {
 }
 
 
-
-
-
 void task3() {
     int n;
     cout<<"Введите размер списка L: ";
@@ -138,11 +135,23 @@ void task3() {
 
 
 
+#include <iostream>
+#include <iterator>
+#include <algorithm>
+#include <limits>
+
+using namespace std;
+
 void task4() {
     double A, D;
     int N;
-    cout << "Введите A, D, N, и количество первых членов: ";
+
+    cout << "Введите A, D, N и число: ";
+
+
     istream_iterator<double> in(cin);
+    istream_iterator<double> end; 
+
     A = *in++;
     D = *in++;
     N = (int)*in++;
@@ -154,5 +163,4 @@ void task4() {
     });
 
     cout << endl;
-    return;
 }

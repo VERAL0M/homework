@@ -501,11 +501,6 @@ void task4(){
 }
 
 
-#include<iostream>
-#include<string>
-#include<sstream>
-#include<locale>
-using namespace std;
 size_t LettersCount(const string&str){
     size_t len=0;
     for(char c:str){
@@ -517,7 +512,7 @@ struct WordNode{
     string data;
     WordNode*next;
     WordNode*prev;
-    WordNode(const string& data){
+    WordNode(string& data){
         this->data=data;
         this->next=nullptr;
         this->prev=nullptr;
@@ -549,7 +544,7 @@ public:
             delete temp;
         }
     }
-    void addWord(const string& word){
+    void addWord(string& word){
         if(word.empty())return;
         WordNode*newNode=new WordNode(word);
         if(tail==nullptr){
