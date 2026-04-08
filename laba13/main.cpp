@@ -18,7 +18,7 @@ int main(){
         cout<<"1. STL3Alg8"<<endl;
         cout<<"2. STL3Alg23"<<endl;
         cout<<"3. STL3Alg43"<<endl;
-        cout<<"4. STL1Iter19"<<endl;
+        cout<<"4. STL3Alg61"<<endl;
         cout<<"0. Exit"<<endl;
         cout<<"Введите номер задачи: ";
         cin>>n;
