@@ -1,0 +1,79 @@
+#include <iostream>
+#include <vector>
+#include <set>
+#include <algorithm>
+#include <map>
+#include <string>
+using namespace std;
+
+void STL5Assoc3() {
+    int N;
+    cout << "Введите N (количество векторов V1..VN): ";
+    cin >> N;
+    if (N <= 0) {
+        cout << "Ошибка! N должно быть больше 0!" << endl;
+        return;
+    }
+    int sz0;
+    cout << "Введите размер вектора V0: ";
+    cin >> sz0;
+    vector<int> V0(sz0);
+    cout << "Введите элементы V0:\n";
+    for (int i = 0; i < sz0; ++i) cin >> V0[i];
+
+    multiset<int> ms0(V0.begin(), V0.end());
+    int matchCount = 0;
+
+    for (int i = 1; i <= N; ++i) {
+        int szI;
+        cout << "Введите размер вектора V" << i << ": ";
+        cin >> szI;
+        vector<int> Vi(szI);
+        cout << "Введите элементы V" << i << ":\n";
+        for (int j = 0; j < szI; ++j) cin >> Vi[j];
+
+        multiset<int> msi(Vi.begin(), Vi.end());
+        if (includes(ms0.begin(), ms0.end(), msi.begin(), msi.end())) {
+            ++matchCount;
+        }
+    }
+    cout << "\nРезультат: " << matchCount << " вектор(ов) содержат все элементы V0.\n";
+}
+
+void STL5Assoc15() {
+    int n;
+    cout << "Введите количество элементов вектора V: ";
+    cin >> n;
+    vector<int> V(n); // <-- ИСПРАВЛЕНО: добавлено <int>
+    cout << "Введите элементы вектора V:\n";
+    for (int i = 0; i < n; ++i) cin >> V[i];
+
+    map<int, int> M;
+    for (vector<int>::iterator it = V.begin(); it != V.end(); ++it) {
+        M[*it]++;
+    }
+
+    cout << "Результат (элемент количество):\n";
+    for (map<int, int>::iterator mit = M.begin(); mit != M.end(); ++mit) {
+        cout << mit->first << " " << mit->second << endl;
+    }
+}
+
+void STL5Assoc22() {
+    int n;
+    cout << "Введите количество слов: ";
+    cin >> n;
+    vector<string> V(n); // <-- ИСПРАВЛЕНО: добавлено <string>
+    cout << "Введите слова (заглавными буквами):\n";
+    for (int i = 0; i < n; ++i) cin >> V[i];
+
+    multimap<char, string> M;
+    for (const auto& word : V) {
+        M.insert({word.back(), word});
+    }
+
+    cout << "Результат группировки:\n";
+    for (const auto& p : M) {
+        cout << p.first << " " << p.second << endl;
+    }
+}
