@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <map>
 #include <string>
+#include <cctype>
 using namespace std;
 
 void STL5Assoc3() {
@@ -65,7 +66,16 @@ void STL5Assoc22() {
     cin >> n;
     vector<string> V(n); 
     cout << "Введите слова (заглавными буквами):\n";
-    for (int i = 0; i < n; i++) cin >> V[i];
+    for (int i = 0; i < n; i++) {
+        cin >> V[i];
+        for (char z: V[i]){
+            if (!isupper(z)){
+                cout<<"Ошибка. Слова должны быть с заглавной буквы!"<<endl;
+                return;
+            }
+        }
+
+    }
 
     multimap<char, string> M;
     for (auto& word : V) {

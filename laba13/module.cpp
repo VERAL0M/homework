@@ -6,6 +6,7 @@
 #include <list>
 #include <numeric>
 #include <deque>
+#include <cctype>
 
 using namespace std;
 
@@ -130,7 +131,7 @@ void STL3Alg23() {
 
 list<int> random_genericListChet(){
     int a,b,k;
-    cout<<"Введите число а, b, k-кол-во элементов в списке(должно делиться на 4) (от скольки до скольки могут принимать значения элементы масива): ";
+    cout<<"Введите число а, b, k-кол-во элементов в списке(должно делиться на 2) (от скольки до скольки могут принимать значения элементы масива): ";
     cin>>a>>b>>k;
     if (k%2==0){
         srand(time(0));
@@ -174,7 +175,7 @@ void STL3Alg43() {
 struct CombinePairs {
     string operator()(const string& left, const string& right) const {
         if (left.empty() || right.empty()) return "";
-        return string() + left.front() + right.back();
+        return string() +  right.front() + left.back();
     }
 };
 
@@ -188,9 +189,15 @@ list<string> inputList() {
         return L;
     }
     cout << "Введите слова:\n";
-    for (int i = 0; i < n; ++i) {
+    for (int i=0; i < n; i++) {
         string s;
         cin >> s;
+        for (char z: s){
+            if (!isupper(z)){
+                cout<<"Ошибка! Слова должны быть с заглавной буквы "<<endl;
+                return {};
+            }
+        }
         L.push_back(s);
     }
     return L;

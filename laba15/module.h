@@ -121,11 +121,10 @@ public:
     std::string getName() const;
 };
 
-#endif 
 
 
-#include <iostream>
-#include <string>
+
+
 
 class NameUpdate {
 private:
@@ -207,3 +206,5 @@ void task2();
 void task3();
 void task4();
 void task5();
+
+#endif
