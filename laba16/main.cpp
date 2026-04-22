@@ -12,8 +12,6 @@ int main(){
         cout<<"1. TreeWork8"<<endl;
         cout<<"2. TreeWork10"<<endl;
         cout<<"3. TreeWork18"<<endl;
-        cout<<"4. Заглушка 4"<<endl;
-        cout<<"5. Заглушка 5"<<endl;
         cout<<"0. Exit"<<endl;
         cout<<"Введите номер задачи: ";
         cin>>n;
