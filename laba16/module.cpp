@@ -183,5 +183,3 @@ void task3() {
     TreeVerifier::runChecks(tree);
 }
 
-void task4() { cout << "Задача 4 не реализована.\n"; }
-void task5() { cout << "Задача 5 не реализована.\n"; }
