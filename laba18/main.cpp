@@ -1,0 +1,38 @@
+#include <iostream>
+#include "module.h"
+
+int main(){
+
+    using namespace std;
+
+    int n=10;
+
+    while (n!=0)
+    {
+        cout<<"1. TreeFun2"<<endl;
+        cout<<"2. TreeFun4"<<endl;
+        cout<<"3. TreeFun13"<<endl;
+        cout<<"0. Exit"<<endl;
+        cout<<"Введите номер задачи: ";
+        cin>>n;
+        switch (n)
+        {
+        case 1:
+            task1();
+            break;
+        case 2:
+            task2();
+            break;
+        case 3:
+            task3();
+            break;
+        case 0:
+            break;
+        default:
+            cout<<"Не существует задачи с таким номером"<<endl;
+            break;
+        }
+    }
+    
+    return 0;
+}
