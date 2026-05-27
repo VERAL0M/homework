@@ -79,7 +79,7 @@ void runTask8() {
     vector<string> tokens;
     while(iss >> tok) tokens.push_back(tok);
 
-    // Построение из префиксной записи (справа налево)
+
     for (int i = tokens.size()-1; i >= 0; i--) {
         string& s = tokens[i];
         int val;
