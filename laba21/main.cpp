@@ -1,66 +1,66 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <queue>
-#include <locale>
+    #include <iostream>
+    #include <fstream>
+    #include <vector>
+    #include <queue>
+    #include <locale>
 
-using namespace std;
+    using namespace std;
 
-void task_graf2() {
-    ifstream fin("FileName1");
-    if (!fin) {
-        cout << "Oshibka: net faila FileName1\n";
-        return;
-    }
-
-    int n;
-    fin >> n;
-
-    vector<vector<int>> a(n, vector<int>(n));
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            fin >> a[i][j];
+    void task_graf2() {
+        ifstream fin("FileName1");
+        if (!fin) {
+            cout << "Oshibka: net faila FileName1\n";
+            return;
         }
-    }
-    fin.close();
 
-    int m = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (a[i][j] == 1) {
-                m++;
+        int n;
+        fin >> n;
+
+        vector<vector<int>> a(n, vector<int>(n));
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                fin >> a[i][j];
             }
         }
-    }
+        fin.close();
 
-    vector<vector<int>> b(n, vector<int>(m, 0));
-    int k = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (a[i][j] == 1) {
-                b[i][k] = 1;
-                b[j][k] = 1;
-                k++;
+        int m = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (a[i][j] == 1) {
+                    m++;
+                }
             }
         }
-    }
 
-    ofstream fout("FileName2");
-    if (!fout) {
-        cout << "Oshibka: ne udalos sozdat FileName2\n";
-        return;
-    }
-
-    fout << n << " " << m << "\n";
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            fout << b[i][j] << " ";
+        vector<vector<int>> b(n, vector<int>(m, 0));
+        int k = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (a[i][j] == 1) {
+                    b[i][k] = 1;
+                    b[j][k] = 1;
+                    k++;
+                }
+            }
         }
-        fout << "\n";
+
+        ofstream fout("FileName2");
+        if (!fout) {
+            cout << "Oshibka: ne udalos sozdat FileName2\n";
+            return;
+        }
+
+        fout << n << " " << m << "\n";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                fout << b[i][j] << " ";
+            }
+            fout << "\n";
+        }
+        fout.close();
+        cout << "Rezultat v faile FileName2.\n";
     }
-    fout.close();
-    cout << "Rezultat v faile FileName2.\n";
-}
 
 void task_graf7() {
     ifstream fin("FileName");
@@ -210,9 +210,9 @@ int main() {
 
     int n = 1;
     while (n != 0) {
-        cout << "1. Graf2 (Matritsa intsidentnosti)\n";
-        cout << "2. Graf7 (Sfery vliyaniya)\n";
-        cout << "3. Graf9 (Marshruty s peresadkami)\n";
+        cout << "1. Graf2 \n";
+        cout << "2. Graf7 \n";
+        cout << "3. Graf9 \n";
         cout << "0. Vykhod\n";
         cout << "Vyberite zadachu: ";
         cin >> n;
