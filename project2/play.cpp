@@ -51,7 +51,7 @@ void show_deck(const Deck& deck, const string& name) {
 
 
 bool isWin(int c1, int c2) {
-    // Особый случай: 0 бьёт 9
+
     if (c1 == 0 && c2 == 9) return true;
     if (c2 == 0 && c1 == 9) return false;
 
