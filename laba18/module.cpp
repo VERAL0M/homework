@@ -55,7 +55,7 @@ void clearListTree(ListNode* node) {
 }
 
 void task1() {
-    std::cout << "\n=== ЗАДАЧА 1: Список → BST ===" << std::endl;
+    std::cout << "\n=== ЗАДАЧА 1: Список  BST ===" << std::endl;
     
     ListNode* n1 = new ListNode{1, nullptr, nullptr};
     ListNode* n2 = new ListNode{2, nullptr, nullptr};
