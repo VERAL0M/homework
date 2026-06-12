@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <limits>
 #include "play.h"
@@ -13,10 +14,8 @@ int main() {
         
 
         if (!(cin >> choice)) {
-            cout << "Ошибка ввода! Введите число от 1 до 3.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
+            cout << "\nОшибка ввода! Введите число от 1 до 3.\n";
+            exit(EXIT_FAILURE); 
         }
 
         switch (choice) {
@@ -31,6 +30,7 @@ int main() {
                 break;
             default: 
                 cout << "Неверный пункт меню. Попробуйте снова.\n";
+                exit(EXIT_FAILURE); 
         }
     } while (choice != 3);
 

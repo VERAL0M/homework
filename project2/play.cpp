@@ -2,6 +2,7 @@
 #include <string>
 #include <limits>
 #include "play.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -58,18 +59,23 @@ bool isWin(int c1, int c2) {
     return c1 > c2;
 }
 
-bool readCards(Deck& deck) {
+void readCards(Deck& deck) {
     for (int i = 0; i < 5; i++) {
         int card;
+
         if (!(cin >> card)) {
-            return false;  
+            cout << "\n[КРИТИЧЕСКАЯ ОШИБКА] Введены нечисловые данные. Программа завершена.\n";
+            exit(EXIT_FAILURE);
         }
+        
+  
         if (card < 0 || card > 9) {
-            return false;
+            cout << "\n[КРИТИЧЕСКАЯ ОШИБКА] Карта должна быть числом от 0 до 9. Введено: " << card << ". Программа завершена.\n";
+            exit(EXIT_FAILURE);
         }
+        
         push_back(deck, card);
     }
-    return true;
 }
 
 void playDurachok() {
@@ -77,20 +83,10 @@ void playDurachok() {
     
     cout << "\n--- Начало игры в 'Пьяницу' ---\n";
     cout << "Введите 5 карт первого игрока (0-9, через пробел):\n> ";
-    
-    if (!readCards(player1)) {
-        cout << "Ошибка ввода! Карты должны быть числами от 0 до 9.\n";
-        return;
-    }
+    readCards(player1); 
     
     cout << "Введите 5 карт второго игрока (0-9, через пробел):\n> ";
-    
-    if (!readCards(player2)) {
-        cout << "Ошибка ввода! Карты должны быть числами от 0 до 9.\n";
-        clear_deck(player1);
-        return;
-    }
-    
+    readCards(player2); 
     cout << "\nКарты розданы!\n";
     show_deck(player1, "Игрок 1");
     show_deck(player2, "Игрок 2");

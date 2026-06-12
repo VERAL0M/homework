@@ -21,7 +21,7 @@ void show_deck(const Deck& deck, const string& name);
 bool isWin(int c1, int c2);
 
 
-bool readCards(Deck& deck);
+void  readCards(Deck& deck);
 
 
 void playDurachok();
